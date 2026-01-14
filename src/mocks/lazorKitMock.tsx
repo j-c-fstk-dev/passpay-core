@@ -91,6 +91,8 @@ export const useWallet = () => {
           }
         } as any);
 
+        void assertion; // Mark as used for TypeScript
+
         console.log('✅ Assinatura biométrica confirmada!');
 
         // Simulate gasless transaction
