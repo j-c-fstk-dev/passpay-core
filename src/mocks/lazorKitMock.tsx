@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
 // Uses REAL WebAuthn biometry for authentic demo
 
 // Mock transaction data
-const generateMockTransactions = (walletAddress: string) => [
+const generateMockTransactions = () => [
   {
     id: 'tx_001',
     hash: '5xKqXiGaslessTx_' + Date.now() + '_demo_001',
@@ -88,6 +88,7 @@ export const useWallet = () => {
 
         // Simulate smart wallet creation with balance and transactions
         const walletAddress = '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM';
+        void walletAddress; // Mark as used for TypeScript
         const mockWallet = {
           smartWallet: walletAddress,
           credentialId: credential?.id,
@@ -95,7 +96,7 @@ export const useWallet = () => {
             usdc: '150.75',
             usd: '150.75'
           },
-          transactions: generateMockTransactions(walletAddress)
+          transactions: generateMockTransactions()
         };
 
         setWallet(mockWallet);
