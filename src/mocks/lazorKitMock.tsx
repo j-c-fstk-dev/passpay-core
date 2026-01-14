@@ -1,33 +1,73 @@
 import React, { useState } from 'react';
 
 // Mock implementation for LazorKit SDK since package is not published yet
-// For demo purposes, simulates the API
+// Uses REAL WebAuthn biometry for authentic demo
 
 export const LazorkitProvider = ({ children }: { children: React.ReactNode }) => <div>{children}</div>;
 
 export const useWallet = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [wallet, setWallet] = useState<{ smartWallet: string } | null>(null);
+  const [wallet, setWallet] = useState<{ smartWallet: string; credentialId?: string } | null>(null);
 
   return {
     connect: async ({ feeMode }: { feeMode?: string } = {}) => {
       setIsConnecting(true);
-      console.log('✅ Mock: Passkey auth success');
+      console.log('🔐 Iniciando autenticação biométrica real (WebAuthn)...');
       void feeMode; // Mark as used to satisfy TypeScript
 
-      // Simulate async connection
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      try {
+        // REAL WebAuthn - Creates biometric credential
+        const credential = await navigator.credentials.create({
+          publicKey: {
+            challenge: crypto.getRandomValues(new Uint8Array(32)), // Secure random challenge
+            rp: {
+              name: "LazorKit Bounty Demo",
+              id: window.location.hostname
+            },
+            user: {
+              id: crypto.getRandomValues(new Uint8Array(16)),
+              name: "demo@lazorkit-bounty.com",
+              displayName: "Demo User"
+            },
+            pubKeyCredParams: [
+              { alg: -7, type: "public-key" }, // ES256
+              { alg: -257, type: "public-key" } // RS256
+            ],
+            authenticatorSelection: {
+              userVerification: "required", // REQUIRES biometric/PIN
+              residentKey: "preferred"
+            },
+            timeout: 60000
+          }
+        } as any);
 
-      const mockWallet = { smartWallet: '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM' };
-      setWallet(mockWallet);
-      setIsConnected(true);
-      setIsConnecting(false);
+        console.log('✅ BIOMETRIA CONFIRMADA! Credencial criada:', credential);
 
-      return mockWallet;
+        // Simulate smart wallet creation
+        const mockWallet = {
+          smartWallet: '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
+          credentialId: credential?.id
+        };
+
+        setWallet(mockWallet);
+        setIsConnected(true);
+
+        return mockWallet;
+      } catch (error: any) {
+        console.error('❌ Biometria falhou:', error.name);
+        if (error.name === 'NotAllowedError') {
+          alert('Autenticação biométrica cancelada. Use digital/PIN/FaceID.');
+        } else if (error.name === 'NotSupportedError') {
+          alert('WebAuthn não suportado neste navegador.');
+        }
+        throw error;
+      } finally {
+        setIsConnecting(false);
+      }
     },
     disconnect: () => {
-      console.log('Mock: Disconnected');
+      console.log('👋 Wallet desconectada');
       setIsConnected(false);
       setWallet(null);
     },
@@ -35,13 +75,33 @@ export const useWallet = () => {
     isConnecting,
     wallet,
     signAndSendTransaction: async (tx: any) => {
-      console.log('✅ Mock: Gasless USDC tx success');
-      void tx; // Mark as used to satisfy TypeScript
+      console.log('🔐 Solicitando segunda autenticação biométrica...');
+      void tx; // Mark as used
 
-      // Simulate async transaction
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      try {
+        // REAL WebAuthn assertion for signing
+        const assertion = await navigator.credentials.get({
+          publicKey: {
+            challenge: crypto.getRandomValues(new Uint8Array(32)),
+            allowCredentials: wallet?.credentialId ? [{
+              id: new TextEncoder().encode(wallet.credentialId),
+              type: 'public-key'
+            }] : [],
+            userVerification: 'required' // REQUIRES biometric again
+          }
+        } as any);
 
-      return '5xKqXiGaslessDemoSignature1234567890abcdef'; // Mock signature
+        console.log('✅ Assinatura biométrica confirmada!');
+
+        // Simulate gasless transaction
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        return '5xKqXiGaslessTx_' + Date.now() + '_WebAuthn';
+
+      } catch (error: any) {
+        console.error('❌ Assinatura biométrica falhou:', error.name);
+        throw new Error('Assinatura biométrica cancelada');
+      }
     }
   };
 };

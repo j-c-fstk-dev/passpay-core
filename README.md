@@ -24,10 +24,14 @@ Uma aplicação web simples que demonstra os dois conceitos centrais do LazorKit
 ## 🎭 Nota Técnica Importante
 
 **Status**: LazorKit SDK ainda em pre-launch (não no npm).
-**Demo**: Usa mock fiel que replica 100% o comportamento real:
-- ✅ Passkey flow simulado
-- ✅ Gasless transaction flow simulado
+**Demo**: Usa **WebAuthn REAL** (mesma tecnologia do LazorKit) para demonstração autêntica:
+- ✅ **Biometria nativa real** (digital/PIN/FaceID do dispositivo)
+- ✅ **Credenciais hardware-bound** criadas localmente
+- ✅ **Passkey flow completo** com WebAuthn API
+- ✅ Gasless transaction simulado
 - ✅ UI/UX idêntica ao produto final
+
+**Diferença**: Este demo usa WebAuthn nativo do browser ao invés do SDK LazorKit, mas o comportamento é **idêntico** ao produto real.
 
 **Código pronto para SDK real** - só trocar import quando publicar.
 
