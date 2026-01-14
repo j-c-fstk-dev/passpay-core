@@ -1,23 +1,31 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter var', 'system-ui', 'sans-serif'],
+      colors: {
+        gray: {
+          900: '#0f172a',
+          800: '#1e293b',
+          700: '#334155',
+        },
+        purple: {
+          600: '#9333ea',
+          500: '#a855f7',
+          400: '#c084fc',
+          300: '#d8b4fe',
+        },
+        cyan: {
+          600: '#0891b2',
+          500: '#06b6d4',
+          400: '#22d3ee',
+        },
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-        'bounce-glow': 'bounce-glow 2s ease-in-out infinite',
-      },
-      backdropBlur: {
-        xs: '2px',
-      },
-      boxShadow: {
-        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-        'glow': '0 0 20px rgba(168, 85, 247, 0.4)',
-        'glow-lg': '0 0 40px rgba(168, 85, 247, 0.6)',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       }
     },
   },
