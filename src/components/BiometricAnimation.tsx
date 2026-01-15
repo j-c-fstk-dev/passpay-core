@@ -13,7 +13,7 @@ export const BiometricAnimation = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-purple-900 animate-in fade-in duration-300">
-      <div className="bg-gray-800/95 rounded-2xl border border-purple-500/30 max-w-md mx-4 p-8 text-center">
+      <div className="bg-gray-800 rounded-2xl border border-purple-500/30 max-w-md mx-4 p-8 text-center">
         {/* Círculos pulsantes */}
         <div className="relative w-48 h-48 mx-auto mb-8">
           {/* Círculo externo */}
@@ -82,7 +82,7 @@ export const CreatingWalletAnimation = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-purple-900 animate-in fade-in duration-300">
-      <div className="bg-gray-800/95 rounded-2xl border border-purple-500/30 max-w-md mx-4 p-8 text-center">
+      <div className="bg-gray-800 rounded-2xl border border-purple-500/30 max-w-md mx-4 p-8 text-center">
         {/* Ícone animado */}
         <div className="relative w-40 h-40 mx-auto mb-8">
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 animate-spin" style={{ animationDuration: '3s' }}>
@@ -125,7 +125,7 @@ export const SuccessAnimation = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-purple-900 p-4">
-      <div className={`bg-gray-800/95 rounded-2xl border border-purple-500/30 max-w-md mx-4 p-8 text-center transition-all duration-500 ${show ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}>
+      <div className={`bg-gray-800 rounded-2xl border border-purple-500/30 max-w-md mx-4 p-8 text-center transition-all duration-500 ${show ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}>
         {/* Confetti effect */}
         <div className="relative w-40 h-40 md:w-48 md:h-48 mx-auto mb-6 md:mb-8">
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 shadow-glow-green animate-pulse">
