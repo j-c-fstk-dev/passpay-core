@@ -30,29 +30,44 @@ function AppContent() {
   // Handler COMPLETO que chama o WebAuthn na hora certa
   const handleStartWalletCreation = async () => {
     console.log('🔵 === INÍCIO DO FLUXO ===');
-    
+
     try {
-      // Passo 1: Animação de biometria
+      // Delay inicial de 2s antes de mostrar primeira animação
+      console.log('🔵 Aguardando 2s antes de iniciar...');
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Passo 1: Animação de biometria (visível por 2s)
       console.log('🔵 Step 1: Mostrando animação de biometria');
       setOnboardingStep('auth');
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Transição de 1s entre animações
+      console.log('🔵 Transição auth → creating (1s)');
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
       // Passo 2: Animação de criação + CHAMA WEBAUTHN AQUI
       console.log('🔵 Step 2: Criando carteira (WebAuthn vai abrir agora)');
       setOnboardingStep('creating');
-      
+
       // IMPORTANTE: Chama connect() DURANTE a animação de criação
       const walletResult = await connect({ feeMode: 'paymaster' });
       console.log('✅ Carteira criada:', walletResult);
-      
-      // Passo 3: Animação de sucesso
+
+      // Mantém animação visível por mais 2s após connect
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      // Transição de 1s entre animações
+      console.log('🔵 Transição creating → success (1s)');
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Passo 3: Animação de sucesso (visível por 2s)
       console.log('🔵 Step 3: Mostrando sucesso');
       setOnboardingStep('success');
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       // Passo 4: useEffect detecta isConnected=true e vai pro dashboard
       console.log('🔵 Step 4: useEffect vai detectar isConnected e ir pro dashboard');
-      
+
     } catch (error) {
       console.error('🔴 Erro no fluxo:', error);
       setOnboardingStep('intro');

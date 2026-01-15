@@ -12,7 +12,7 @@ export const BiometricAnimation = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-300" style={{backgroundColor: 'rgba(0,0,0,0.95)'}}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-1000" style={{backgroundColor: 'rgba(0,0,0,0.95)'}}>
       <div className="rounded-2xl border-2 border-purple-500 max-w-md mx-4 p-8 text-center" style={{backgroundColor: 'rgb(17, 24, 39)'}}>
         {/* Círculos pulsantes */}
         <div className="relative w-48 h-48 mx-auto mb-8">
@@ -81,7 +81,7 @@ export const CreatingWalletAnimation = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-300" style={{backgroundColor: 'rgba(0,0,0,0.95)'}}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-1000" style={{backgroundColor: 'rgba(0,0,0,0.95)'}}>
       <div className="rounded-2xl border-2 border-purple-500 max-w-md mx-4 p-8 text-center" style={{backgroundColor: 'rgb(17, 24, 39)'}}>
         {/* Ícone animado */}
         <div className="relative w-40 h-40 mx-auto mb-8">
@@ -124,7 +124,7 @@ export const SuccessAnimation = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-4" style={{backgroundColor: 'rgba(0,0,0,0.95)'}}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-4 animate-in fade-in duration-1000" style={{backgroundColor: 'rgba(0,0,0,0.95)'}}>
       <div className={`rounded-2xl border-2 border-purple-500 max-w-md mx-4 p-8 text-center transition-all duration-500 ${show ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`} style={{backgroundColor: 'rgb(17, 24, 39)'}}>
         {/* Confetti effect */}
         <div className="relative w-40 h-40 md:w-48 md:h-48 mx-auto mb-6 md:mb-8">
