@@ -43,10 +43,10 @@ export const BiometricAnimation = () => {
 
         {/* Texto */}
         <h2 className="text-3xl font-bold text-white mb-4 animate-pulse">
-          Autenticando biometria
+          Iniciando autenticação
         </h2>
         <p className="text-purple-300 text-lg mb-8 max-w-md mx-auto">
-          Use sua digital, FaceID ou PIN para confirmar
+          Preparando para confirmar sua biometria
         </p>
 
         {/* Barras de loading animadas */}
@@ -95,10 +95,10 @@ export const CreatingWalletAnimation = () => {
 
         {/* Texto */}
         <h2 className="text-3xl font-bold text-white mb-4">
-          Criando sua carteira gasless
+          Autenticando e criando carteira gasless
         </h2>
         <p className="text-purple-300 text-lg mb-8 max-w-md mx-auto">
-          Gerando chaves seguras e configurando biometria
+          Confirmando biometria e gerando chaves seguras
         </p>
 
         {/* Progress bar */}

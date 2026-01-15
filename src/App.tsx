@@ -7,7 +7,7 @@ import WalletConnect from './components/WalletConnect';
 import TransactionForm from './components/TransactionForm';
 
 function AppContent() {
-  const { isConnected, wallet, connect } = useWallet();
+  const { isConnected, wallet, connect, disconnect } = useWallet();
   const [isTransactionMode, setIsTransactionMode] = useState(false);
   const [showReceive, setShowReceive] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState<'intro' | 'auth' | 'creating' | 'success' | 'dashboard'>('intro');
@@ -83,12 +83,26 @@ function AppContent() {
             </div>
 
             {isConnected && wallet && onboardingStep === 'dashboard' && (
-              <div className="badge-success text-[10px] md:text-xs px-2 py-1 md:px-3 md:py-2">
-                <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full animate-pulse" />
-                <code className="font-mono hidden md:inline">
-                  {`${wallet.smartWallet?.slice(0, 4)}...${wallet.smartWallet?.slice(-4)}`}
-                </code>
-                <span className="md:hidden">✓</span>
+              <div className="flex items-center gap-2">
+                <div className="badge-success text-[10px] md:text-xs px-2 py-1 md:px-3 md:py-2">
+                  <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full animate-pulse" />
+                  <code className="font-mono hidden md:inline">
+                    {`${wallet.smartWallet?.slice(0, 4)}...${wallet.smartWallet?.slice(-4)}`}
+                  </code>
+                  <span className="md:hidden">✓</span>
+                </div>
+                <button
+                  onClick={async () => {
+                    try {
+                      await disconnect();
+                    } catch (error) {
+                      console.error('Disconnect error:', error);
+                    }
+                  }}
+                  className="text-red-400 hover:text-red-300 text-[10px] md:text-xs px-2 py-1 rounded-md hover:bg-red-500/10 transition-colors"
+                >
+                  Desconectar
+                </button>
               </div>
             )}
           </div>
